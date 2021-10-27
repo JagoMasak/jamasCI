@@ -9,7 +9,6 @@ class Mitra_model extends CI_Model
 		} else {
 			return $this->db->get_where('tbl_mitra',['id_mitra' => $id_mitra])->result_array();
 		}
-		
 	}
 
 	public function deletemitra($id_mitra)

@@ -9,7 +9,6 @@ class Jenis_model extends CI_Model
 		} else {
 			return $this->db->get_where('tbl_jenis',['id_jenis' => $id_jenis])->result_array();
 		}
-		
 	}
 
 	public function deletejenis($id_jenis)
