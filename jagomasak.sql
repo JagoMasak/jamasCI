@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2021 at 05:52 PM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 7.4.16
+-- Waktu pembuatan: 24 Nov 2021 pada 15.04
+-- Versi server: 10.4.11-MariaDB
+-- Versi PHP: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `keys`
+-- Struktur dari tabel `keys`
 --
 
 CREATE TABLE `keys` (
@@ -39,7 +40,7 @@ CREATE TABLE `keys` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `keys`
+-- Dumping data untuk tabel `keys`
 --
 
 INSERT INTO `keys` (`id`, `user_id`, `key`, `level`, `ignore_limits`, `is_private_key`, `ip_addresses`, `date_created`) VALUES
@@ -49,157 +50,204 @@ INSERT INTO `keys` (`id`, `user_id`, `key`, `level`, `ignore_limits`, `is_privat
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_admin`
+-- Struktur dari tabel `tbl_gambar_produk`
 --
 
-CREATE TABLE `tbl_admin` (
-  `id_admin` int(11) NOT NULL,
-  `nama_admin` varchar(50) NOT NULL,
-  `no_hp` varchar(13) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` text NOT NULL
+CREATE TABLE `tbl_gambar_produk` (
+  `id` int(11) NOT NULL,
+  `id_produk` int(11) NOT NULL,
+  `path` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tbl_admin`
---
-
-INSERT INTO `tbl_admin` (`id_admin`, `nama_admin`, `no_hp`, `email`, `password`) VALUES
-(1, 'Iqbal Fahrul Rahman', '081234567812', 'qblfahrul@gmail.com', 'e10adc3949ba59abbe56e057f20f883e');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_jenis`
+-- Struktur dari tabel `tbl_kategori`
 --
 
-CREATE TABLE `tbl_jenis` (
-  `id_jenis` int(11) NOT NULL,
-  `jenis_produk` varchar(100) NOT NULL
+CREATE TABLE `tbl_kategori` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `slug` varchar(100) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `update_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tbl_jenis`
+-- Dumping data untuk tabel `tbl_kategori`
 --
 
-INSERT INTO `tbl_jenis` (`id_jenis`, `jenis_produk`) VALUES
-(1, 'Paket Siap Saji'),
-(2, 'Paket Siap Masak');
+INSERT INTO `tbl_kategori` (`id`, `nama`, `slug`, `created_at`, `update_at`) VALUES
+(3, 'Produk paket sop', 'produk-paket-sop', '2021-11-23 02:15:47', '2021-11-23 02:15:47'),
+(5, 'Produk Mentah', 'produk-mentah', '2021-11-18 08:47:42', '2021-11-18 08:47:42'),
+(6, 'pindang pegagan', 'pindang-pegagan', '2021-11-23 02:03:26', '2021-11-23 02:03:26'),
+(9, 'Sayur sop', 'sayur-sop', '2021-11-23 02:17:27', '2021-11-23 02:17:27'),
+(12, 'Sayur sop6', 'sayur-sop6', '2021-11-23 03:03:57', '2021-11-23 03:03:57');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_mitra`
+-- Struktur dari tabel `tbl_mitra`
 --
 
 CREATE TABLE `tbl_mitra` (
-  `id_mitra` int(11) NOT NULL,
-  `nama_mitra` varchar(100) NOT NULL,
-  `nama_toko` varchar(100) NOT NULL,
-  `alamat_toko` text NOT NULL,
-  `nohp` varchar(13) NOT NULL,
-  `email` varchar(50) NOT NULL
+  `id` int(11) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `slug` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `alamat` text NOT NULL,
+  `telepon` varchar(13) NOT NULL,
+  `ktp` text NOT NULL,
+  `status` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tbl_mitra`
+-- Dumping data untuk tabel `tbl_mitra`
 --
 
-INSERT INTO `tbl_mitra` (`id_mitra`, `nama_mitra`, `nama_toko`, `alamat_toko`, `nohp`, `email`) VALUES
-(1, 'Bu Desi', 'Toko Bu Desi', 'Jl. Mawar', '081234583192', 'desi@gmail.com');
+INSERT INTO `tbl_mitra` (`id`, `nama`, `slug`, `email`, `alamat`, `telepon`, `ktp`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Reine', '', 'PavoliaReine@gmail.com', 'Palembang', 'Palembang', '16092281023123', 'Aktif', '2021-11-23 01:48:57', '2021-11-23 07:49:03'),
+(3, 'Nn. Moona', 'nn-moona', 'Moona@gmail.com', 'Palembang', '082280025622', '16000012121212', 'Aktif', '2021-11-23 01:53:08', '2021-11-23 07:54:38');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_produk`
+-- Struktur dari tabel `tbl_produk`
 --
 
 CREATE TABLE `tbl_produk` (
-  `id_produk` int(11) NOT NULL,
-  `id_mitra` int(11) NOT NULL,
-  `id_jenis` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `penjual` int(11) NOT NULL,
   `nama_produk` varchar(100) NOT NULL,
   `deskripsi` text NOT NULL,
-  `gambar` text DEFAULT NULL,
-  `harga` int(11) NOT NULL
+  `id_kategori` int(11) NOT NULL,
+  `jenis` enum('Paket Siap Saji','Paket Siap Masak') NOT NULL,
+  `harga` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tbl_produk`
+-- Dumping data untuk tabel `tbl_produk`
 --
 
-INSERT INTO `tbl_produk` (`id_produk`, `id_mitra`, `id_jenis`, `nama_produk`, `deskripsi`, `gambar`, `harga`) VALUES
-(1, 1, 1, 'Paket Siap Saji Soto', 'Langsung siap saji', 'img-paket-sayur-sop.jpg', 39000),
-(2, 1, 2, 'Paket Siap Masak Soto', 'Bahan-bahan\r\n\r\n6 siung bawang putih\r\n5 butir bawang merah\r\n1 sdt merica bubuk Secukupnya garam\r\n1 bungkus kaldu bubuk\r\n1 buah wortel\r\n1 buah kentang\r\n1/2 bagian kol\r\n1 bungkus makroni\r\n2 batang daun bawang\r\n2 batang seledri\r\n1 sdm minyak(untuk menumis)\r\n1200 ml air\r\n\r\nLangkah-langkah\r\n1. Siapkan bahannya\r\n2. Potong2 sesuai selera & cuci bersih\r\n3. Iris tipis2 bawang merah & bawang putih,Tumis hingga harum\r\n4. Didihkan air,masukkan tumisan bawang merah & bawang putih,merica,kaldu bubuk,garam,sayuran & makroni.masak hingga matang\r\n5. Siap di hidangkan.', 'img-siap-sayur-soto.jpg', 8000);
+INSERT INTO `tbl_produk` (`id`, `penjual`, `nama_produk`, `deskripsi`, `id_kategori`, `jenis`, `harga`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Sayur Sop', ' enak di makan pake nasi', 3, 'Paket Siap Saji', 200000, '2021-11-19 01:10:40', '2021-11-19 07:11:08'),
+(2, 3, 'Sayur Sop', ' enak', 4, '', 20000, '2021-11-19 01:27:27', '2021-11-19 07:28:13'),
+(3, 1, 'Soto', 'Enak', 3, '', 20000, '2021-11-19 10:53:18', '2021-11-19 10:53:18'),
+(5, 3, 'ayam goreng', ' ayam dll', 5, '', 22000, '2021-11-21 07:21:07', '2021-11-21 13:22:11'),
+(6, 3, 'ayam goreng', ' ayam goreng', 4, 'Paket Siap Saji', 130000, '2021-11-23 01:09:22', '2021-11-23 01:09:22');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tbl_user`
+--
+
+CREATE TABLE `tbl_user` (
+  `id_user` int(10) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `level_user` int(5) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `nama_lengkap` varchar(50) NOT NULL,
+  `status` int(5) NOT NULL,
+  `photo` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tbl_user`
+--
+
+INSERT INTO `tbl_user` (`id_user`, `username`, `password`, `level_user`, `email`, `nama_lengkap`, `status`, `photo`) VALUES
+(1, 'admin', 'admin', 1, 'jamasjagomasak@gmail.com', 'Pavolia Reine', 1, ''),
+(4, 'reine', '21232f297a57a5a743894a0e4a801fc3', 1, 'admin@gmail.com', 'Pavolia Reine', 1, '');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `keys`
+-- Indeks untuk tabel `keys`
 --
 ALTER TABLE `keys`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_admin`
+-- Indeks untuk tabel `tbl_gambar_produk`
 --
-ALTER TABLE `tbl_admin`
-  ADD PRIMARY KEY (`id_admin`),
-  ADD UNIQUE KEY `email` (`email`);
+ALTER TABLE `tbl_gambar_produk`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`,`id_produk`);
 
 --
--- Indexes for table `tbl_jenis`
+-- Indeks untuk tabel `tbl_kategori`
 --
-ALTER TABLE `tbl_jenis`
-  ADD PRIMARY KEY (`id_jenis`);
+ALTER TABLE `tbl_kategori`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`,`nama`);
 
 --
--- Indexes for table `tbl_mitra`
+-- Indeks untuk tabel `tbl_mitra`
 --
 ALTER TABLE `tbl_mitra`
-  ADD PRIMARY KEY (`id_mitra`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`,`nama`,`status`) USING HASH;
 
 --
--- Indexes for table `tbl_produk`
+-- Indeks untuk tabel `tbl_produk`
 --
 ALTER TABLE `tbl_produk`
-  ADD PRIMARY KEY (`id_produk`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`,`penjual`,`nama_produk`,`id_kategori`,`jenis`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indeks untuk tabel `tbl_user`
+--
+ALTER TABLE `tbl_user`
+  ADD PRIMARY KEY (`id_user`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `keys`
+-- AUTO_INCREMENT untuk tabel `keys`
 --
 ALTER TABLE `keys`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `tbl_admin`
+-- AUTO_INCREMENT untuk tabel `tbl_gambar_produk`
 --
-ALTER TABLE `tbl_admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `tbl_gambar_produk`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tbl_jenis`
+-- AUTO_INCREMENT untuk tabel `tbl_kategori`
 --
-ALTER TABLE `tbl_jenis`
-  MODIFY `id_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `tbl_kategori`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `tbl_mitra`
+-- AUTO_INCREMENT untuk tabel `tbl_mitra`
 --
 ALTER TABLE `tbl_mitra`
-  MODIFY `id_mitra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `tbl_produk`
+-- AUTO_INCREMENT untuk tabel `tbl_produk`
 --
 ALTER TABLE `tbl_produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_user`
+--
+ALTER TABLE `tbl_user`
+  MODIFY `id_user` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
