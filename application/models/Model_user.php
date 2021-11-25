@@ -1,6 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Model_user extends CI_Model{
+    public function check_user($username, $password) {
+        $query = $this->db->query("select * from tbl_user where username='$username' AND password='$password' limit 1");
+        return $query;
+    }
+    
 	function tampil_data(){
 		return $this->db->get('tbl_user');
 	}
@@ -23,6 +28,3 @@ class Model_user extends CI_Model{
 		$this->db->update($table,$data);
 	}	
 }
-
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */

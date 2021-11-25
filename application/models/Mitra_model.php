@@ -7,14 +7,8 @@ class Mitra_model extends CI_Model
 		if ( $id_mitra === null) {
 			return $this->db->get('tbl_mitra')->result_array();
 		} else {
-			return $this->db->get_where('tbl_mitra',['id_mitra' => $id_mitra])->result_array();
+			return $this->db->get_where('tbl_mitra', ['id_mitra' => $id_mitra])->result_array();
 		}
-	}
-
-	public function deletemitra($id_mitra)
-	{
-		$this->db->delete('tbl_mitra', ['id_mitra' => $id_mitra]);
-		return $this->db->affected_rows();
 	}
 
 	public function createmitra($data)
@@ -23,9 +17,15 @@ class Mitra_model extends CI_Model
 		return $this->db->affected_rows();
 	}
 
-	public function updatemitra($data, $id)
+	public function updatemitra($data, $id_mitra)
 	{
-		$this->db->update('tbl_mitra', $data, ['id_mitra' => $id]);
+		$this->db->update('tbl_mitra', $data, ['id_mitra' => $id_mitra]);
 		return $this->db->affected_rows();
 	}
+
+    public function deletemitra($id_mitra)
+    {
+        $this->db->delete('tbl_mitra', ['id_mitra' => $id_mitra]);
+        return $this->db->affected_rows();
+    }
 }

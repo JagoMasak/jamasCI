@@ -8,15 +8,16 @@ class Admin extends CI_Controller {
             redirect('login');
         }
 
-        $this->load->model('model_user');
+        $this->load->model('Model_user');
         $this->load->helper('url');
     }
 
     public function index(){
         $data=array(
-                    'error'=>'',
-                    'username'=>$this->session->userdata('username')
-                    );
+            'error'=>'',
+            'username'=>$this->session->userdata('username')
+        );
+
         $isi['content']   ='admin/isi';
         $isi['judul']     ='Dashboard';
         $isi['sub_judul'] ='Home';
@@ -30,4 +31,3 @@ class Admin extends CI_Controller {
         redirect('login');
     }
 }
-    
