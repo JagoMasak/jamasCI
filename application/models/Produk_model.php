@@ -22,7 +22,7 @@ class Produk_model extends CI_Model
 
     public function getjenisproduk($jenis = null)
     {
-        if ( $id_jenis === null) {
+        if ( $jenis === null) {
             $this->db->select('*');
             $this->db->from('tbl_produk a');
             $this->db->join('tbl_kategori b', 'b.id_kategori = a.id_kategori');
@@ -34,6 +34,24 @@ class Produk_model extends CI_Model
             $this->db->join('tbl_kategori b', 'b.id_kategori = a.id_kategori');
             $this->db->join('tbl_mitra c', 'c.id_mitra = a.id_mitra');
             $this->db->where('a.jenis', $jenis);
+            return $this->db->get()->result_array();
+        }
+    }
+
+    public function getkategoriproduk($id_kategori = null)
+    {
+        if ( $id_kategori === null) {
+            $this->db->select('*');
+            $this->db->from('tbl_produk a');
+            $this->db->join('tbl_kategori b', 'b.id_kategori = a.id_kategori');
+            $this->db->join('tbl_mitra c', 'c.id_mitra = a.id_mitra');
+            return $this->db->get()->result_array();
+        } else {
+            $this->db->select('*');
+            $this->db->from('tbl_produk a');
+            $this->db->join('tbl_kategori b', 'b.id_kategori = a.id_kategori');
+            $this->db->join('tbl_mitra c', 'c.id_mitra = a.id_mitra');
+            $this->db->where('a.id_kategori', $id_kategori);
             return $this->db->get()->result_array();
         }
     }

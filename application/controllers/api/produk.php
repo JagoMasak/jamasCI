@@ -39,11 +39,33 @@ class produk extends REST_Controller
 
     public function jenis_get()
     {
-        $id_jenis = $this->get('id_jenis');
-        if ($id_jenis === null) {
+        $jenis = $this->get('jenis');
+        if ($jenis === null) {
             $produk = $this->Produk_model->getjenisproduk();
         } else {
-            $produk = $this->Produk_model->getjenisproduk($id_jenis);
+            $produk = $this->Produk_model->getjenisproduk($jenis);
+        }
+
+        if($produk) {
+            $this->response([
+                'status'    => TRUE,
+                'data'      => $produk
+            ], REST_Controller::HTTP_OK);
+        } else {
+            $this->response([
+                'status'    => FALSE,
+                'messege'   => 'Tidak Di Temukan'
+            ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function kategori_get()
+    {
+        $id_kategori = $this->get('id_kategori');
+        if ($id_kategori === null) {
+            $produk = $this->Produk_model->getkategoriproduk();
+        } else {
+            $produk = $this->Produk_model->getkategoriproduk($id_kategori);
         }
 
         if($produk) {
@@ -81,6 +103,7 @@ class produk extends REST_Controller
         }
     }
 
+    // Belum digunakan
     public function index_delete()
     {
         $id_produk = $this->delete('id_produk');
@@ -95,7 +118,7 @@ class produk extends REST_Controller
             // ok
                 $this->response([
                     'status' 	          => TRUE,
-                    'id_produk' 	  => $id_produk,
+                    'id_produk' 	      => $id_produk,
                     'messege' 	          => 'data di hapus'
                 ], REST_Controller::HTTP_NO_CONTENT);
             } else {
@@ -143,7 +166,6 @@ class produk extends REST_Controller
             'jenis_produk' 		=> $this->put('jenis_produk'),
             'harga' 			=> $this->put('harga'),
             'stok' 				=> $this->put('stok')
-
         ];
 
         if( $this->Produk_model->updateproduk($data, $id) > 0) {
