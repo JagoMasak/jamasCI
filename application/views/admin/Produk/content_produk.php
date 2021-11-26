@@ -20,6 +20,7 @@
                                 <th>Deskripsi</th>
                                 <th>Kategori</th>
                                 <th>Jenis</th>
+                                <th>Gambar</th>
                                 <th>Harga</th>
                                 <th>Action</th>
                             </tr>
@@ -34,6 +35,13 @@
                                 <td><?= $row['deskripsi'];?></td>
                                 <td><?= $row['nama_kategori']; ?></td>
                                 <td><?= $row['jenis'];?></td>
+                                <td>
+                                    <?php $gambar = $this->Produk_model->getgambarproduk($row['id_produk']); foreach($gambar as $pic) : ?>
+                                        <a href="<?= base_url().'assets/img/'.$pic['path'] ?>" target="_blank">
+                                            <?= $pic['path']; ?>
+                                        </a><br>
+                                    <?php endforeach; ?>
+                                </td>
                                 <td><?= "Rp " . number_format($row['harga'],2,',','.');?></td>
 
                                 <td>

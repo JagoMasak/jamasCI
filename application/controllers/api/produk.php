@@ -12,16 +12,16 @@ class produk extends REST_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Produk_model');
+        $this->load->model('APIProduk_model');
     }
     
     public function index_get()
     {
         $id_produk = $this->get('id_produk');
         if ($id_produk === null) {
-            $produk = $this->Produk_model->getproduk();
+            $produk = $this->APIProduk_model->getproduk();
         } else {
-            $produk = $this->Produk_model->getproduk($id_produk);
+            $produk = $this->APIProduk_model->getproduk($id_produk);
         }
 
         if($produk) {
@@ -41,9 +41,9 @@ class produk extends REST_Controller
     {
         $jenis = $this->get('jenis');
         if ($jenis === null) {
-            $produk = $this->Produk_model->getjenisproduk();
+            $produk = $this->APIProduk_model->getjenisproduk();
         } else {
-            $produk = $this->Produk_model->getjenisproduk($jenis);
+            $produk = $this->APIProduk_model->getjenisproduk($jenis);
         }
 
         if($produk) {
@@ -63,9 +63,9 @@ class produk extends REST_Controller
     {
         $id_kategori = $this->get('id_kategori');
         if ($id_kategori === null) {
-            $produk = $this->Produk_model->getkategoriproduk();
+            $produk = $this->APIProduk_model->getkategoriproduk();
         } else {
-            $produk = $this->Produk_model->getkategoriproduk($id_kategori);
+            $produk = $this->APIProduk_model->getkategoriproduk($id_kategori);
         }
 
         if($produk) {
@@ -85,9 +85,9 @@ class produk extends REST_Controller
     {
         $keyword = $this->get('keyword');
         if ($keyword === null) {
-            $produk = $this->Produk_model->getcariproduk();
+            $produk = $this->APIProduk_model->getcariproduk();
         } else {
-            $produk = $this->Produk_model->getcariproduk($keyword);
+            $produk = $this->APIProduk_model->getcariproduk($keyword);
         }
 
         if($produk) {
@@ -100,85 +100,6 @@ class produk extends REST_Controller
                 'status'    => FALSE,
                 'messege'   => 'Tidak Di Temukan'
             ], REST_Controller::HTTP_NOT_FOUND);
-        }
-    }
-
-    // Belum digunakan
-    public function index_delete()
-    {
-        $id_produk = $this->delete('id_produk');
-
-        if( $id_produk === null) {
-            $this->response([
-                'status' 	=> FALSE,
-                'messege' 	=> 'provide an id!'
-            ], REST_Controller::HTTP_BAD_REQUEST);
-        } else {
-            if( $this->Produk_model->deleteproduk($id_produk) > 0 ) {
-            // ok
-                $this->response([
-                    'status' 	          => TRUE,
-                    'id_produk' 	      => $id_produk,
-                    'messege' 	          => 'data di hapus'
-                ], REST_Controller::HTTP_NO_CONTENT);
-            } else {
-            // id not found
-                $this->response([
-                    'status' 	=> FALSE,
-                    'messege' 	=> 'id not found!'
-                ], REST_Controller::HTTP_BAD_REQUEST);
-            }
-        }
-    }
-
-    public function index_post()
-    {
-        $data = [
-            'nama_toko' 		=> $this->post('nama_toko'),
-            'nama_produk' 		=> $this->post('nama_produk'),
-            'jenis_produk' 		=> $this->post('jenis_produk'),
-            'harga' 			=> $this->post('harga'),
-            'stok' 				=> $this->post('stok')
-        ];
-
-        if( $this->Produk_model->createproduk($data) > 0) {
-        // ok
-            $this->response([
-                'status' 	=> TRUE,
-                'id_produk' 	=> $data,
-                'messege' 	=> 'Data produk telah di buat.'
-            ], REST_Controller::HTTP_CREATED);
-        } else {
-        // id not found
-            $this->response([
-                'status' 	=> FALSE,
-                'messege' 	=> 'Gagal membuat data baru'
-            ], REST_Controller::HTTP_BAD_REQUEST);
-        }
-    }
-
-    public function index_put()
-    {
-        $id 	= $this->put('id_produk');
-        $data 	= [
-            'nama_toko' 		=> $this->put('nama_toko'),
-            'nama_produk' 		=> $this->put('nama_produk'),
-            'jenis_produk' 		=> $this->put('jenis_produk'),
-            'harga' 			=> $this->put('harga'),
-            'stok' 				=> $this->put('stok')
-        ];
-
-        if( $this->Produk_model->updateproduk($data, $id) > 0) {
-            $this->response([
-                'status' 	=> TRUE,
-                'messege' 	=> 'Data produk telah di ubah.'
-            ], REST_Controller::HTTP_NO_CONTENT);
-        } else {
-        // id not found
-            $this->response([
-                'status' 	=> FALSE,
-                'messege' 	=> 'Gagal mengubah data'
-            ], REST_Controller::HTTP_BAD_REQUEST);
         }
     }
 

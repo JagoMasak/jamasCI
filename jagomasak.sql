@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Nov 2021 pada 04.31
+-- Waktu pembuatan: 26 Nov 2021 pada 19.13
 -- Versi server: 10.4.18-MariaDB
 -- Versi PHP: 7.4.16
 
@@ -58,6 +58,14 @@ CREATE TABLE `tbl_gambar_produk` (
   `path` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `tbl_gambar_produk`
+--
+
+INSERT INTO `tbl_gambar_produk` (`id`, `id_produk`, `path`) VALUES
+(48, 24, 'demo1.jpg'),
+(49, 24, 'demo2.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -106,7 +114,7 @@ CREATE TABLE `tbl_mitra` (
 
 INSERT INTO `tbl_mitra` (`id_mitra`, `nama_mitra`, `slug`, `email`, `alamat`, `telepon`, `ktp`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'Reine', 'reine', 'PavoliaReine@gmail.com', 'Palembang', 'Palembang', '16092281023123', 'Aktif', '2021-11-25 09:56:10', '2021-11-25 15:56:16'),
-(3, 'Nn. Moona', 'nn-moona', 'Moona@gmail.com', 'Palembang', '082280025622', '16000012121212', 'Aktif', '2021-11-23 01:53:08', '2021-11-23 07:54:38');
+(3, 'Moona', 'moona', 'Moona@gmail.com', 'Palembang', '082280025622', '16000012121212', 'Aktif', '2021-11-23 01:53:08', '2021-11-26 12:10:06');
 
 -- --------------------------------------------------------
 
@@ -131,9 +139,7 @@ CREATE TABLE `tbl_produk` (
 --
 
 INSERT INTO `tbl_produk` (`id_produk`, `id_mitra`, `nama_produk`, `deskripsi`, `id_kategori`, `jenis`, `harga`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Sayur Sop', ' enak di makan pake nasi', 3, 'Paket Siap Saji', 200000, '2021-11-19 01:10:40', '2021-11-19 07:11:08'),
-(3, 1, 'Soto', 'Enak', 3, '', 20000, '2021-11-19 10:53:18', '2021-11-19 10:53:18'),
-(5, 3, 'ayam goreng', ' ayam dll', 5, '', 22000, '2021-11-21 07:21:07', '2021-11-21 13:22:11');
+(24, 1, 'Sayur Sop', 'Deskripsi sayur sop', 9, 'Paket Siap Saji', 99000, '2021-11-26 12:10:18', '2021-11-26 12:12:24');
 
 -- --------------------------------------------------------
 
@@ -175,7 +181,7 @@ ALTER TABLE `keys`
 --
 ALTER TABLE `tbl_gambar_produk`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`,`id_produk`);
+  ADD KEY `id_produk` (`id_produk`);
 
 --
 -- Indeks untuk tabel `tbl_kategori`
@@ -217,7 +223,7 @@ ALTER TABLE `keys`
 -- AUTO_INCREMENT untuk tabel `tbl_gambar_produk`
 --
 ALTER TABLE `tbl_gambar_produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_kategori`
@@ -235,7 +241,7 @@ ALTER TABLE `tbl_mitra`
 -- AUTO_INCREMENT untuk tabel `tbl_produk`
 --
 ALTER TABLE `tbl_produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_user`
@@ -246,6 +252,12 @@ ALTER TABLE `tbl_user`
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
+
+--
+-- Ketidakleluasaan untuk tabel `tbl_gambar_produk`
+--
+ALTER TABLE `tbl_gambar_produk`
+  ADD CONSTRAINT `tbl_gambar_produk_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `tbl_produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `tbl_produk`

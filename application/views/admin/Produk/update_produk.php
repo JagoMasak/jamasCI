@@ -71,12 +71,48 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Gambar Produk</label>
+                            
+                            <div class="col-sm-10">
+                                <input type="file" name="gambar[]" class="form-control" placeholder="Gambar" multiple>
+                            </div>
+                        </div>
+
                         <div class="box-footer">
                             <a href="<?= base_url();?>admin/Produk" class="btn btn-danger btn-sm">Batal</a> &nbsp;&nbsp;
                             <button type="submit" class="btn btn-info btn-sm">Simpan</button>
                         </div>
                     </div>
                 </form>
+
+                <div class="table-responsive">
+                    <h4 class="box-title">Gambar Produk</h4>
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Gambar</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <?php $no = 1; foreach ($gambarproduk as $pic) { ?>
+                            <tr>
+                                <td><?= $no; ?></td>
+                                <td>
+                                    <a href="<?= base_url().'assets/img/'.$pic['path'] ?>" target="_blank"><?= $pic['path']; ?></a>
+                                </td>
+
+                                <td>
+                                    <a href="<?php echo base_url()."admin/Produk/hapusgambar/".$pic['id']; ?>" class="btn btn-danger btn-sm" onclick="javascript:return confirm('Anda yakin ingin hapus?')">Delete</a>
+                                </td>
+                            </tr>
+                            <?php $no++; } ?>
+                        </tbody>
+                    </table>
+                </div>
             <?php } ?>
         </div>
     </div>
