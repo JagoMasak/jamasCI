@@ -1,7 +1,7 @@
 <li class="header">MAIN NAVIGATION</li>
 
 <li class="<?php if($this->uri->segment(2) == 'admin') { echo 'active'; } ?>">
-    <a href="admin">
+    <a href="<?= base_url() ?>admin/admin">
         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
     </a>
 </li>

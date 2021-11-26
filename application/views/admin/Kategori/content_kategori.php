@@ -22,8 +22,8 @@
                             <td><?= $row['nama_kategori'];?></td>
 
                             <td>
-                                <a href="<?php echo base_url()."admin/kategori/update/".$row['id_kategori']; ?>" class="btn btn-success btn-sm">Edit</a>
-                                <a href="<?php echo base_url()."admin/kategori/hapus/".$row['id_kategori']; ?>" class="btn btn-danger btn-sm" onclick="javascript:return confirm('Anda yakin ingin hapus?')">Delete</a>
+                                <a href="<?php echo base_url()."admin/Kategori/update/".$row['id_kategori']; ?>" class="btn btn-success btn-sm">Edit</a>
+                                <a href="<?php echo base_url()."admin/Kategori/hapus/".$row['id_kategori']; ?>" class="btn btn-danger btn-sm" onclick="javascript:return confirm('Anda yakin ingin hapus?')">Delete</a>
                             </td>
                         </tr>
                     <?php $no++; } ?>

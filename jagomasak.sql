@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 24 Nov 2021 pada 15.04
--- Versi server: 10.4.11-MariaDB
--- Versi PHP: 7.4.3
+-- Waktu pembuatan: 26 Nov 2021 pada 04.31
+-- Versi server: 10.4.18-MariaDB
+-- Versi PHP: 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -66,8 +65,8 @@ CREATE TABLE `tbl_gambar_produk` (
 --
 
 CREATE TABLE `tbl_kategori` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(100) NOT NULL,
+  `id_kategori` int(11) NOT NULL,
+  `nama_kategori` varchar(100) NOT NULL,
   `slug` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `update_at` timestamp NOT NULL DEFAULT current_timestamp()
@@ -77,12 +76,10 @@ CREATE TABLE `tbl_kategori` (
 -- Dumping data untuk tabel `tbl_kategori`
 --
 
-INSERT INTO `tbl_kategori` (`id`, `nama`, `slug`, `created_at`, `update_at`) VALUES
+INSERT INTO `tbl_kategori` (`id_kategori`, `nama_kategori`, `slug`, `created_at`, `update_at`) VALUES
 (3, 'Produk paket sop', 'produk-paket-sop', '2021-11-23 02:15:47', '2021-11-23 02:15:47'),
 (5, 'Produk Mentah', 'produk-mentah', '2021-11-18 08:47:42', '2021-11-18 08:47:42'),
-(6, 'pindang pegagan', 'pindang-pegagan', '2021-11-23 02:03:26', '2021-11-23 02:03:26'),
-(9, 'Sayur sop', 'sayur-sop', '2021-11-23 02:17:27', '2021-11-23 02:17:27'),
-(12, 'Sayur sop6', 'sayur-sop6', '2021-11-23 03:03:57', '2021-11-23 03:03:57');
+(9, 'Sayur sop', 'sayur-sop', '2021-11-23 02:17:27', '2021-11-23 02:17:27');
 
 -- --------------------------------------------------------
 
@@ -91,8 +88,8 @@ INSERT INTO `tbl_kategori` (`id`, `nama`, `slug`, `created_at`, `update_at`) VAL
 --
 
 CREATE TABLE `tbl_mitra` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(100) NOT NULL,
+  `id_mitra` int(11) NOT NULL,
+  `nama_mitra` varchar(100) NOT NULL,
   `slug` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `alamat` text NOT NULL,
@@ -107,8 +104,8 @@ CREATE TABLE `tbl_mitra` (
 -- Dumping data untuk tabel `tbl_mitra`
 --
 
-INSERT INTO `tbl_mitra` (`id`, `nama`, `slug`, `email`, `alamat`, `telepon`, `ktp`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Reine', '', 'PavoliaReine@gmail.com', 'Palembang', 'Palembang', '16092281023123', 'Aktif', '2021-11-23 01:48:57', '2021-11-23 07:49:03'),
+INSERT INTO `tbl_mitra` (`id_mitra`, `nama_mitra`, `slug`, `email`, `alamat`, `telepon`, `ktp`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Reine', 'reine', 'PavoliaReine@gmail.com', 'Palembang', 'Palembang', '16092281023123', 'Aktif', '2021-11-25 09:56:10', '2021-11-25 15:56:16'),
 (3, 'Nn. Moona', 'nn-moona', 'Moona@gmail.com', 'Palembang', '082280025622', '16000012121212', 'Aktif', '2021-11-23 01:53:08', '2021-11-23 07:54:38');
 
 -- --------------------------------------------------------
@@ -118,8 +115,8 @@ INSERT INTO `tbl_mitra` (`id`, `nama`, `slug`, `email`, `alamat`, `telepon`, `kt
 --
 
 CREATE TABLE `tbl_produk` (
-  `id` int(11) NOT NULL,
-  `penjual` int(11) NOT NULL,
+  `id_produk` int(11) NOT NULL,
+  `id_mitra` int(11) NOT NULL,
   `nama_produk` varchar(100) NOT NULL,
   `deskripsi` text NOT NULL,
   `id_kategori` int(11) NOT NULL,
@@ -133,12 +130,10 @@ CREATE TABLE `tbl_produk` (
 -- Dumping data untuk tabel `tbl_produk`
 --
 
-INSERT INTO `tbl_produk` (`id`, `penjual`, `nama_produk`, `deskripsi`, `id_kategori`, `jenis`, `harga`, `created_at`, `updated_at`) VALUES
+INSERT INTO `tbl_produk` (`id_produk`, `id_mitra`, `nama_produk`, `deskripsi`, `id_kategori`, `jenis`, `harga`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Sayur Sop', ' enak di makan pake nasi', 3, 'Paket Siap Saji', 200000, '2021-11-19 01:10:40', '2021-11-19 07:11:08'),
-(2, 3, 'Sayur Sop', ' enak', 4, '', 20000, '2021-11-19 01:27:27', '2021-11-19 07:28:13'),
 (3, 1, 'Soto', 'Enak', 3, '', 20000, '2021-11-19 10:53:18', '2021-11-19 10:53:18'),
-(5, 3, 'ayam goreng', ' ayam dll', 5, '', 22000, '2021-11-21 07:21:07', '2021-11-21 13:22:11'),
-(6, 3, 'ayam goreng', ' ayam goreng', 4, 'Paket Siap Saji', 130000, '2021-11-23 01:09:22', '2021-11-23 01:09:22');
+(5, 3, 'ayam goreng', ' ayam dll', 5, '', 22000, '2021-11-21 07:21:07', '2021-11-21 13:22:11');
 
 -- --------------------------------------------------------
 
@@ -186,22 +181,21 @@ ALTER TABLE `tbl_gambar_produk`
 -- Indeks untuk tabel `tbl_kategori`
 --
 ALTER TABLE `tbl_kategori`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`,`nama`);
+  ADD PRIMARY KEY (`id_kategori`);
 
 --
 -- Indeks untuk tabel `tbl_mitra`
 --
 ALTER TABLE `tbl_mitra`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`,`nama`,`status`) USING HASH;
+  ADD PRIMARY KEY (`id_mitra`);
 
 --
 -- Indeks untuk tabel `tbl_produk`
 --
 ALTER TABLE `tbl_produk`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`,`penjual`,`nama_produk`,`id_kategori`,`jenis`);
+  ADD PRIMARY KEY (`id_produk`),
+  ADD KEY `id_mitra` (`id_mitra`),
+  ADD KEY `id_kategori` (`id_kategori`);
 
 --
 -- Indeks untuk tabel `tbl_user`
@@ -229,25 +223,36 @@ ALTER TABLE `tbl_gambar_produk`
 -- AUTO_INCREMENT untuk tabel `tbl_kategori`
 --
 ALTER TABLE `tbl_kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_mitra`
 --
 ALTER TABLE `tbl_mitra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_mitra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_produk`
 --
 ALTER TABLE `tbl_produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
   MODIFY `id_user` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `tbl_produk`
+--
+ALTER TABLE `tbl_produk`
+  ADD CONSTRAINT `tbl_produk_ibfk_1` FOREIGN KEY (`id_mitra`) REFERENCES `tbl_mitra` (`id_mitra`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbl_produk_ibfk_2` FOREIGN KEY (`id_kategori`) REFERENCES `tbl_kategori` (`id_kategori`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

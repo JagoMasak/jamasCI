@@ -37,8 +37,8 @@
                                 <td><?= "Rp " . number_format($row['harga'],2,',','.');?></td>
 
                                 <td>
-                                    <a href="<?php echo base_url()."admin/produk/update/".$row['id_produk']; ?>" class="btn btn-success btn-sm">Edit</a>
-                                    <a href="<?php echo base_url()."admin/produk/hapus/".$row['id_produk']; ?>" class="btn btn-danger btn-sm" onclick="javascript:return confirm('Anda yakin ingin hapus?')">Delete</a>
+                                    <a href="<?php echo base_url()."admin/Produk/update/".$row['id_produk']; ?>" class="btn btn-success btn-sm">Edit</a>
+                                    <a href="<?php echo base_url()."admin/Produk/hapus/".$row['id_produk']; ?>" class="btn btn-danger btn-sm" onclick="javascript:return confirm('Anda yakin ingin hapus?')">Delete</a>
                                 </td>
                             </tr>
                             <?php $no++; } ?>

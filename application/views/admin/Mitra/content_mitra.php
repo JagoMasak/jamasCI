@@ -37,8 +37,8 @@
                                     <td><?= $row['status'];?></td>
 
                                     <td>
-                                        <a href="<?php echo base_url()."admin/mitra/update/".$row['id_mitra']; ?>" class="btn btn-success btn-sm">Edit</a>
-                                        <a href="<?php echo base_url()."admin/mitra/hapus/".$row['id_mitra']; ?>" class="btn btn-danger btn-sm" onclick="javascript:return confirm('Anda yakin ingin hapus?')">Delete</a>
+                                        <a href="<?php echo base_url()."admin/Mitra/update/".$row['id_mitra']; ?>" class="btn btn-success btn-sm">Edit</a>
+                                        <a href="<?php echo base_url()."admin/Mitra/hapus/".$row['id_mitra']; ?>" class="btn btn-danger btn-sm" onclick="javascript:return confirm('Anda yakin ingin hapus?')">Delete</a>
                                     </td>
                                 </tr>
                             <?php $no++; } ?>
