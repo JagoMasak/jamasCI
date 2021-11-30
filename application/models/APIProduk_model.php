@@ -10,6 +10,7 @@ class APIProduk_model extends CI_Model
             $this->db->join('tbl_kategori b', 'b.id_kategori = a.id_kategori');
             $this->db->join('tbl_mitra c', 'c.id_mitra = a.id_mitra');
             $this->db->join('tbl_gambar_produk d', 'd.id_produk = a.id_produk');
+            $this->db->group_by('a.id_produk');
 			return $this->db->get()->result_array();
 		} else {
             $this->db->select('a.id_produk, a.nama_produk, a.deskripsi, a.jenis, a.harga, a.created_at, b.nama_kategori, c.nama_mitra, group_concat(d.path) as images');
@@ -30,6 +31,7 @@ class APIProduk_model extends CI_Model
             $this->db->join('tbl_kategori b', 'b.id_kategori = a.id_kategori');
             $this->db->join('tbl_mitra c', 'c.id_mitra = a.id_mitra');
             $this->db->join('tbl_gambar_produk d', 'd.id_produk = a.id_produk');
+            $this->db->group_by('a.id_produk');
             return $this->db->get()->result_array();
         } else {
             $this->db->select('a.id_produk, a.nama_produk, a.deskripsi, a.jenis, a.harga, a.created_at, b.nama_kategori, c.nama_mitra, group_concat(d.path) as images');
@@ -50,6 +52,7 @@ class APIProduk_model extends CI_Model
             $this->db->join('tbl_kategori b', 'b.id_kategori = a.id_kategori');
             $this->db->join('tbl_mitra c', 'c.id_mitra = a.id_mitra');
             $this->db->join('tbl_gambar_produk d', 'd.id_produk = a.id_produk');
+            $this->db->group_by('a.id_produk');
             return $this->db->get()->result_array();
         } else {
             $this->db->select('a.id_produk, a.nama_produk, a.deskripsi, a.jenis, a.harga, a.created_at, b.nama_kategori, c.nama_mitra, group_concat(d.path) as images');
@@ -70,6 +73,7 @@ class APIProduk_model extends CI_Model
             $this->db->join('tbl_kategori b', 'b.id_kategori = a.id_kategori');
             $this->db->join('tbl_mitra c', 'c.id_mitra = a.id_mitra');
             $this->db->join('tbl_gambar_produk d', 'd.id_produk = a.id_produk');
+            $this->db->group_by('a.id_produk');
             return $this->db->get()->result_array();
         } else {
             $this->db->select('a.id_produk, a.nama_produk, a.deskripsi, a.jenis, a.harga, a.created_at, b.nama_kategori, c.nama_mitra, group_concat(d.path) as images');
@@ -78,6 +82,7 @@ class APIProduk_model extends CI_Model
             $this->db->join('tbl_mitra c', 'c.id_mitra = a.id_mitra');
             $this->db->join('tbl_gambar_produk d', 'd.id_produk = a.id_produk');
             $this->db->like('nama_produk', $keyword);
+            $this->db->group_by('a.id_produk');
             return $this->db->get()->result_array();
         }
     }
